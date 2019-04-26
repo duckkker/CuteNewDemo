@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FragmentTest</string>
+    <string name="title_activity_another">AnotherActivity</string>
+    <string name="title_activity_my_list_view">MyListView</string>
+</resources>
