@@ -13,9 +13,16 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+
     private LeftFragment LeftFragment;
     private RightFragment RightFragment;
     private CenterFragment CenterFragment;
+
+    private FragmentManager fragmentManager;
+
+//    LeftFragment leftFragmentFlag;
+//    CenterFragment centerFragmentFlag;
+//    RightFragment rightFragmentFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +33,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button center_button = findViewById(R.id.center_namelist);
         Button right_button = findViewById(R.id.right_setting);
 
-        LeftFragment = new LeftFragment();
-        RightFragment = new RightFragment();
-        CenterFragment = new CenterFragment();
+//        LeftFragment = new LeftFragment();
+//        RightFragment = new RightFragment();
+//        CenterFragment = new CenterFragment();
 
 
         left_button.setOnClickListener(this);
         center_button.setOnClickListener(this);
         right_button.setOnClickListener(this);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.framelayout,LeftFragment).commitAllowingStateLoss();
-       // replaceFragment(new LeftFragment());
+
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if (LeftFragment == null) {
+            LeftFragment = new LeftFragment();
+            fragmentTransaction.add(R.id.framelayout, LeftFragment);
+            Log.d("-----","if");
+        } else {
+            fragmentTransaction.show(LeftFragment);
+        }
+        Log.d("-----","onCreate");
+        fragmentTransaction.commit();
+
+        //getSupportFragmentManager().beginTransaction().add(R.id.framelayout,LeftFragment).commitAllowingStateLoss();
+        //replaceFragment(new LeftFragment(),"a");
 
     }
 
@@ -45,15 +66,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.left_name:
-                //replaceFragment(new LeftFragment());
-                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,LeftFragment,"left").commitAllowingStateLoss();
+//                LeftFragment = new LeftFragment();
+                Log.d("-----","onCreate123");
+                replaceFragment(LeftFragment,"a");
+                //getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,LeftFragment).commitAllowingStateLoss();
                 break;
             case R.id.center_namelist:
-                //replaceFragment(new CenterFragment());
-                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,CenterFragment).commitAllowingStateLoss();
+//                RightFragment = new RightFragment();
+                replaceFragment(new CenterFragment(),"b");
+                //getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,CenterFragment).commitAllowingStateLoss();
                 break;
             case R.id.right_setting:
-                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,RightFragment).commitAllowingStateLoss();
+//                CenterFragment = new CenterFragment();
+                replaceFragment(new RightFragment(),"c");
+               // getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,RightFragment).commitAllowingStateLoss();
                 break;
             default:
                 break;
@@ -62,12 +88,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //
 
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.framelayout, fragment);
-        transaction.commit();
+    private void replaceFragment(Fragment fragment,final String tag) {
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.framelayout, fragment);
+//        transaction.commit();
 
+
+        Fragment fragmentTag = getSupportFragmentManager().findFragmentByTag(tag);
+//        if (fragment == null&&(tag == "a"||tag == "b"||tag == "c")){
+//           // Fragment fragmentTag = getSupportFragmentManager().findFragmentByTag(tag);
+//            getSupportFragmentManager().beginTransaction().hide(fragmentTag).add(R.id.framelayout,fragment).addToBackStack(null).commitAllowingStateLoss();
+//        }
+//        else {
+//            getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,fragment).addToBackStack(null).commitAllowingStateLoss();
+//        }
+
+
+        if (fragmentTag != null){
+            getSupportFragmentManager().beginTransaction().hide(fragmentTag).add(R.id.framelayout,fragment).addToBackStack(null).commitAllowingStateLoss();
+            //fragmentTransaction.hide(fragment);
+        }else if (fragmentTag == null){
+            Log.d("-----","onCreate3");
+            getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,fragment).addToBackStack(null).commitAllowingStateLoss();
+            Log.d("-----","onCreate4");
+        }//隐藏当前fragment
     }
 }
 

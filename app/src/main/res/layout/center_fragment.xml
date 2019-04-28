@@ -23,5 +23,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/Recyclerview_button"
         android:text="点击进入Recyclerview"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/InsertRecV_button"
+        android:text="手动添加Recyclerview项目"/>
 
 </LinearLayout>

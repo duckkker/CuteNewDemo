@@ -1,11 +1,11 @@
-package com.example.fragmenttest.RecyclerView;
+package com.example.fragmenttest.RecyclerView.StaticRecyclerView;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.fragmenttest.R;
 
@@ -18,8 +18,10 @@ public class MyRecyclerView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_view);
 
-        List<RecyclerViewData> RecyclerViewData = RecyclerViewDataFactory.createRecData(3);
 
+
+        List<RecyclerViewData> RecyclerViewData = RecyclerViewDataFactory.createRecData(20);
+//recyclerview必备
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this,RecyclerViewData);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = findViewById(R.id.RecyclerView);

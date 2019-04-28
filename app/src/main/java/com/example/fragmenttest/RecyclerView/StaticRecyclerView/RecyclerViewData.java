@@ -1,4 +1,4 @@
-package com.example.fragmenttest.RecyclerView;
+package com.example.fragmenttest.RecyclerView.StaticRecyclerView;
 
 import android.content.Context;
 
