@@ -17,7 +17,7 @@ public class MyRecyclerView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_view);
-
+//12132132132
 
 
         List<RecyclerViewData> RecyclerViewData = RecyclerViewDataFactory.createRecData(20);
